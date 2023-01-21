@@ -31,6 +31,7 @@ namespace Gateways.Models
                      : new ValidationResult("The Serial Number already exists.");
             }
         }
+
         public bool UniqSerialNumberInDb(Gateway gateway, List<Gateway> gateways)
         {
             for (int i = 0; i < gateways.Count; i++)

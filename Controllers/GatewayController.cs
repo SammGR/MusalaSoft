@@ -24,10 +24,12 @@ namespace Gateways.Controllers
         {
             _context = new GatewayContext();
         }
+
         protected override void Dispose(bool disposing)
         {
             _context.Dispose();
         }
+
         public async Task<ActionResult> Gateways()
         {          
             var json = await _client.GetStringAsync(_url);  
@@ -35,11 +37,13 @@ namespace Gateways.Controllers
 
             return View(gateway);
         }
+
         public ActionResult New()
         {
             var viewModel = new Gateway();           
             return View("NewGateway", viewModel);
         }
+
         [HttpPost]
         public ActionResult Save(Gateway gateway)
         {
@@ -72,6 +76,7 @@ namespace Gateways.Controllers
             }
             return RedirectToAction("Gateways", "Gateway");
         }
+
         public ActionResult Edit(int id) {
 
             var gateway = _context.Gateways.Include(d => d.Devices).SingleOrDefault(g => g.Id == id);
@@ -88,6 +93,7 @@ namespace Gateways.Controllers
             return View("GatewayForm", deviceModel);
         
         }
+
         public ActionResult Delete(int id)
         {        
             var delete = _client.DeleteAsync(_url + "/" + id);

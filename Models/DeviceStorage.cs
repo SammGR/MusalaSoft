@@ -24,6 +24,7 @@ namespace Gateways.Models
         {
             _context = new GatewayContext();
         }
+
         public DeviceViewModel DeleteDevice(int id)
         {
             var device = _context.Devices.SingleOrDefault(c => c.Id == id);

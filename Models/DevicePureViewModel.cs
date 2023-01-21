@@ -6,14 +6,17 @@ namespace Gateways.Models
     public class DevicePureViewModel
     {
         public int? Id { get; set; }
+
         [UniqueUid]
         [Required]
         public int? Uid { get; set; }
+
         [Required]
         public string Vendor { get; set; }
 
         [Required]
         public bool IsOnline { get; set; }
+
         public IEnumerable<Gateway> Gateways { get; set; }
 
         [Display(Name = "Gateway")]

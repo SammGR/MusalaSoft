@@ -12,6 +12,7 @@ namespace Gateways.Models
         [UniqueUid]
         [Required(ErrorMessage = "The Uid field is required.")]
         public int Uid { get; set; }
+
         [Required(ErrorMessage = "The Vendor field is required.")]
         [MaxLength(300)]
         public string Vendor { get; set; }
