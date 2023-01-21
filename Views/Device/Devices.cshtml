@@ -35,8 +35,7 @@
                     <td class="text-center">@date</td>
                     <td class="text-center">
                         <div class="d-lg-flex">
-                            @Html.ActionLink("Delete", "Delete", "Device", new { id = device.Id }, null)
-
+                            <button onclick="Delete(@device.Id )" class="btn-link">Delete</button>
                         </div>
                     </td>
                 </tr>
@@ -51,6 +50,21 @@
     <script>
         $(document).ready(function () {
             $("#devices").DataTable();
-        });
+        });    
     </script>
+
+    <script>
+        function Delete(id) {
+            bootbox.confirm('Are you sure oyou want to delete this client', function (result) {
+
+                if (result) {                     
+                    let url = "@Url.Action("Delete","Device",new {id = 999999999 })";
+                    url = url.replace(999999999, id);
+                    location.href = url;
+                }
+            });
+        }
+    </script>
+
+    
 }
