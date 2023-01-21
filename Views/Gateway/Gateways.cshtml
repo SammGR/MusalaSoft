@@ -4,50 +4,62 @@
     ViewBag.Title = "Home Page";
 }
 
-    <div class="table-title">
-        <div class="row box1">
-            <h2> Managing <b>Gateways</b> </h2>
-            @Html.ActionLink("New Gateway", "New", "Gateway", null, new { @class = "btn btn-primary btnbox" })
-        </div>
+<div class="table-title">
+    <div class="row box1">
+        <h2> Managing <b>Gateways</b> </h2>
+        @Html.ActionLink("New Gateway", "New", "Gateway", null, new { @class = "btn btn-primary btnbox" })
     </div>
+</div>
 
 
-    <table id="gateways" class="table table-bordered table-hover">
+<table id="gateways" class="table table-bordered table-hover">
 
-        <thead>
+    <thead>
+        <tr>
+            <th class="text-center">Name</th>
+            <th class="text-center">Serial Number</th>
+            <th class="text-center">Ip Address</th>
+            <th class="text-center">Devices</th>
+            <th class="text-center">Delete</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var gateway in Model)
+        {
             <tr>
-                <th class="text-center">Name</th>
-                <th class="text-center">Serial Number</th>
-                <th class="text-center">Ip Address</th>
-                <th class="text-center">Devices</th>
-                <th class="text-center">Delete</th>
+                <td>@Html.ActionLink(gateway.Name, "Edit", "Gateway", new { id = gateway.Id }, null)</td>
+                <td class="text-center">@gateway.SerialNumber</td>
+                <td class="text-center">@gateway.Ipv4Address</td>
+                <td class="text-center">@gateway.Devices.Count
+                <td class="text-center">
+                    <div class="d-lg-flex">
+                        <button onclick="Delete(@gateway.Id )" class="btn-link">Delete</button>
+                    </div>                    
+                </td>
             </tr>
-        </thead>
+        }
+    </tbody>
+</table>
 
-        <tbody>
-            @foreach (var gateway in Model)
-            {
-                <tr>
-                    <td>@Html.ActionLink(gateway.Name, "Edit", "Gateway", new { id = gateway.Id }, null)</td>
-                    <td class="text-center">@gateway.SerialNumber</td>
-                    <td class="text-center">@gateway.Ipv4Address</td>
-                    <td class="text-center">@gateway.Devices.Count
-                    <td class="text-center">
-                        <div class="d-lg-flex">
-                            @Html.ActionLink("Delete", "Delete", "Gateway", new { id = gateway.Id }, null)
-                        </div>
-                    </td>
-                </tr>
-            }
-        </tbody>
-
-    </table>            
-        
-  @section scripts
+@section scripts
 {
     <script>
         $(document).ready(function () {
             $("#gateways").DataTable();
         });
     </script>
- }
+
+    <script>
+        function Delete(id) {
+            bootbox.confirm('Are you sure oyou want to delete this Gateway', function (result) {
+
+                if (result) {
+                    let url = "@Url.Action("Delete","Gateway",new {id = 999999999 })";
+                    url = url.replace(999999999, id);
+                    location.href = url;
+                }
+            });
+        }
+    </script>
+}

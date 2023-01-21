@@ -55,7 +55,7 @@
 
     <script>
         function Delete(id) {
-            bootbox.confirm('Are you sure oyou want to delete this client', function (result) {
+            bootbox.confirm('Are you sure oyou want to delete this device', function (result) {
 
                 if (result) {                     
                     let url = "@Url.Action("Delete","Device",new {id = 999999999 })";
@@ -64,7 +64,5 @@
                 }
             });
         }
-    </script>
-
-    
+    </script>    
 }
