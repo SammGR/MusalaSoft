@@ -1,0 +1,27 @@
+﻿<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            @Html.ActionLink("Network Node", "Gateways", "Gateway", new { area = "" }, new { @class = "navbar-brand" })
+        </div>
+
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav lolo">
+                <li>@Html.ActionLink("Gateways", "Gateways", "Gateway")</li>
+                <li>@Html.ActionLink("New Gateway", "New", "Gateway")</li>
+                <li>@Html.ActionLink("Devices", "Devices", "Device")</li>
+                <li>@Html.ActionLink("New Device", "New", "Device")</li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li>@Html.ActionLink("Register", "", "")</li>
+                <li>@Html.ActionLink("Log in", "", "")</li>
+            </ul>
+        </div>      
+    </div>   
+ </div>
+

@@ -1,0 +1,31 @@
+﻿@model Gateways.Models.Gateway
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Create Gateway</h2>
+
+@using (Html.BeginForm("Save", "Gateway", FormMethod.Post))
+{
+    <div class="form-group">
+        @Html.LabelFor(m => m.Name)
+        @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Name)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.SerialNumber)
+        @Html.TextBoxFor(m => m.SerialNumber, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.SerialNumber)
+    </div>
+
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Ipv4Address)
+        @Html.TextBoxFor(m => m.Ipv4Address, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Ipv4Address)
+        @Html.HiddenFor(m => m.Id)
+    </div>
+    <button type="submit" name="submit" formmethod="post" class="btn btn-primary">Save</button>
+}

@@ -1,0 +1,56 @@
+﻿@model Gateways.Models.DeviceViewModel
+
+@{
+    ViewBag.Title = "Home Page";
+}
+    <div class="table-title">
+        <div class="row box1">
+            <h2> List of <b>Devices</b> </h2>        
+            @Html.ActionLink("New Device", "New", "Device", null, new { @class = "btn btn-primary btnbox" })
+        </div>
+    </div>
+
+    <table id="devices" class="table table-bordered table-hover">
+
+        <thead>
+            <tr>
+                <th class="text-center">Vendor</th>
+                <th class="text-center">Gateway</th>
+                <th class="text-center">Uid</th>
+                <th class="text-center">Is Online</th>
+                <th class="text-center">Date Created</th>
+                <th class="text-center">Delete</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var device in Model.Devices)
+            {
+                <tr>
+                    <td class="text-center">@Html.ActionLink(device.Vendor, "Edit", "Device", new { id = device.Id }, null)</td>
+                    <td class="text-center">@device.Gateway.Name</td>
+                    <td class="text-center">@device.Uid</td>
+                    <td class="text-center">@device.IsOnline</td>
+                    @{ var date = device.DateCreated.ToString("dd/MM/yyyy"); }
+                    <td class="text-center">@date</td>
+                    <td class="text-center">
+                        <div class="d-lg-flex">
+                            @Html.ActionLink("Delete", "Delete", "Device", new { id = device.Id }, null)
+
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+
+    </table>
+
+
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            $("#devices").DataTable();
+        });
+    </script>
+}

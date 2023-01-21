@@ -1,0 +1,78 @@
+﻿@model Gateways.Models.DeviceViewModel
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+    <body>
+        <div class="text-container">            
+            <div class="title1">
+                <h2>Edit Gateway</h2>
+            </div>
+            <div class="title2">
+                <h2>Devices of this Gateway</h2>
+            </div>
+        </div>
+  
+        <div class="boxes">
+            <div class="box">
+                @using (Html.BeginForm("Save", "Gateway", FormMethod.Post))
+                {
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Gateway.Name)
+                        @Html.TextBoxFor(m => m.Gateway.Name, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.Gateway.Name)
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Gateway.SerialNumber)
+                        @Html.TextBoxFor(m => m.Gateway.SerialNumber, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.Gateway.SerialNumber)
+                    </div>
+
+
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Gateway.Ipv4Address)
+                        @Html.TextBoxFor(m => m.Gateway.Ipv4Address, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.Gateway.Ipv4Address)
+                        @Html.HiddenFor(m => m.Gateway.Id)
+                    </div>
+                    <button type="submit" name="submit" formmethod="post" class="btn btn-primary">Save</button>
+                }
+            </div>
+
+            <div class="box box-table">
+                <div class="form-group-sm">
+                    <table id="devices" class="table table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th class="text-center">Vendor</th>
+                                <th class="text-center">Uid</th>
+                                <th class="text-center">Is Online</th>
+                                <th class="text-center">Date Created</th>
+                                <th class="text-center">Delete</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            @foreach (var device in Model.Gateway.Devices)
+                            {
+                                <tr>
+                                    <td class="text-center">@Html.ActionLink(device.Vendor, "Edit", "Device", new { id = device.Id }, null)</td>
+                                    <td class="text-center">@device.Uid</td>
+                                    <td class="text-center">@device.IsOnline</td>
+                                    @{ var date = device.DateCreated.ToString("dd/MM/yyyy"); }
+                                    <td class="text-center">@date</td>
+                                    <td class="text-center">
+                                        <div class="d-lg-flex">
+                                            @Html.ActionLink("Delete", "Delete", "Device", new { id = device.Id }, null)
+
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </body>
